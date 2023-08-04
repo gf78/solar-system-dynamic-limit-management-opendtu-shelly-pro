@@ -3,6 +3,10 @@
 Dynamic limit managment for OpenDTU with Shelly Gen2 device ( EM3 Pro, Plus 1PM, Plus 2PM, Plus 1PM Pro, Plus 2PM Pro)
 Run this script directly on your shelly generation 2 device to dynamically set the limit of your OpenDTU.
 
+
+Version: 0.1
+
+
 ## Keywords
 
 * Balkonkraftwerk
