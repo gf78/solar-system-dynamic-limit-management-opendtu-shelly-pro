@@ -8,12 +8,15 @@ Run this script directly on your shelly generation 2 device to dynamically set t
 Version: 0.1
 
 
-## Keywords
+## Keywords (German)
 
 * Balkonkraftwerk
 * Nulleinspeisung
 * OpenDTU
 * Shelly
+* Hoymiles
+* Solar
+* Speicher
 
 
 
