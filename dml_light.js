@@ -8,11 +8,11 @@
 /***** CONFIGURATION ***/
 let CONFIG = {
     dtu: {
-        ip: "10.0.0.70",			// Local IP address of OpenDTU
+        ip: "10.0.0.xxx",			// Local IP address of OpenDTU
         user: "admin",				// User for OpenDTU, default: "admin"
-        password: "fischers%40cc",	// Password for OpenDTU (hint: write "%40" instead of "@")
+        password: "secret",			// Password for OpenDTU (hint: write "%40" instead of "@")
         inverter: 0, 				// Index of inverter, default: 0 (first)
-		timeout: 15,				// Timeout for API request [Seconds]
+	timeout: 15,				// Timeout for API request [Seconds]
     },
     shelly: {
         type: null, 				// Component type: "EM" or "Switch", default: null (auto detect)
