@@ -181,10 +181,7 @@ function step4CalculateLimit(data) {
 	
 	// Potential new limit
 	data.limit = data.dtu.limit + data.meter.power - CONFIG.grid.min; 
-	
-	// Round new limit based on config step
-	data.limit = Math.round(data.limit / CONFIG.limit.step.size || 1, 0) * ( CONFIG.limit.step.size || 1);
-	
+		
 	// Apply min limit
 	data.limit = Math.max(data.limit, CONFIG.limit.min, 0);
 	
@@ -211,7 +208,15 @@ function step4CalculateLimit(data) {
 			data.limit = data.dtu.limit - CONFIG.limit.step.max;
 		}
 	}
-		
+
+	// Round new limit based on config step
+	data.limit = Math.round(data.limit / CONFIG.limit.step.size || 1, 0) * ( CONFIG.limit.step.size || 1);
+
+	// Set to current limit, if in same rounding range
+	if(data.limit === Math.round(data.dtu.limit / CONFIG.limit.step.size || 1, 0) * ( CONFIG.dtu.limit.step.size || 1)) {
+		data.limit = data.dtu.limit;
+	}
+	
 	step5AdjustLimit(data);	
 
 }
