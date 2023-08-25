@@ -10,7 +10,7 @@ Dynamically control the limit of your hoymiles microinverter to achieve either z
 * Note: no additional hardware is required. The script runs directly on the shelly device.
 
 ## Installation
-* Select script for your shelly device from "basic" folder (Note: the "experimental" version is not stable due to low mem issues)
+* Select script for your shelly device from "default" folder (Note: the "experimental" version is not stable due to low mem issues)
 * Run script on the shelly device (https://shelly-api-docs.shelly.cloud/gen2/Scripts/Tutorial)
 
 ## Keywords (German)
