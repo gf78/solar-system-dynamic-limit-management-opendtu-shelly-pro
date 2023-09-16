@@ -116,7 +116,6 @@ function evaluateRestart(result, error_code, error_message, userdata) {
 
   if(error_code !== 0) {
     print("[WATCHDOG] ERROR. Could not retrieve configuration of script #" + JSON.stringify(userdata) + ": " + error_message);
-    setPending(false);
     return;
   }
   
@@ -142,7 +141,6 @@ function statusHandler(event_data, userdata) {
       Shelly.call("Script.GetConfig", {id: event_data.delta.id}, evaluateRestart, event_data.delta.id);
     }   
   } catch (e) {
-    setPending(false);
     print("[WATCHDOG] ERROR. Could not handle status change: " + JSON.stringify(e.message));
   }  
 }
@@ -169,7 +167,7 @@ function processScriptList(result, error_code, error_message, userdata) {
          print("[WATCHDOG] Script #" + JSON.stringify(script.id) + " will be restarted.");
          setPending(true);
          execWithDelay(startScript, {id: script.id, callback: notifySuccess});
-         break; // handle only one script
+         break; // restart only one script at once
       }
     }
   } catch(e) {
@@ -191,7 +189,7 @@ function getScriptList(callback, userdata) {
     return;
   }
   try {
-    // print("[WATCHDOG] Retrieve list of scripts");
+    print("[WATCHDOG] Retrieve list of scripts");
     Shelly.call("Script.List", null, callback, userdata);    
   } catch (e) {
     print("[WATCHDOG] ERROR. Could retrieve script list: " + JSON.stringify(e.message));
@@ -216,14 +214,21 @@ function setAutoStart() {
 // Main
 try {
 
+  // Opt. activate autostart for watchdog itself
   setAutoStart(); 
 
+  // Status event handler
   statusHandlerHandle = Shelly.addStatusHandler(statusHandler);  
-
+  
+  // Interval to check all scripts
   if(typeof CONFIG.checkIntervalMS === "number" && CONFIG.checkIntervalMS > 0) {
     checkIntervalHandle = Timer.set(CONFIG.checkIntervalMS, true, getScriptList, processScriptList);
   }
+  
   print("[WATCHDOG] Started");
+  
+  // Check all scripts now
+  getScriptList(processScriptList);
   
 } catch (e) {
   print("[WATCHDOG] ERROR. Could not add Status Handler: " + JSON.stringify(e.message));
