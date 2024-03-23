@@ -1,4 +1,7 @@
 
+
+`!!! This repository is not maintained anymore !!!`
+
 # Dynamic Limit Management
 Dynamically control the limit of your hoymiles microinverter to achieve either zero feed or maximum feed to the grid.
 
